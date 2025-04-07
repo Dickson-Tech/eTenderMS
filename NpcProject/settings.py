@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +25,11 @@ SECRET_KEY = 'django-insecure-z!!e0&69xkn!nxu#ok3&1$&$*_4&q)^$0#rb&$3@=we@0(o1eb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"] # CSRF_TRUSTED_ORIGINS
+
+# FORM SUBMISSION
+# Comment out the following line and place your railway URL, and your production URL in the array.
+# CSRF_TRUSTED_ORIGINS = ["*"]
 
 
 # Application definition
@@ -37,6 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #"eTender.apps.eTenderConfig",
+    "Registration.apps.RegistrationConfig",
+    "Registry.apps.RegistryConfig",
+    "Notification.apps.NotificationConfig",
+    "GIS.apps.GisConfig",
+    "Identity.apps.IdentityConfig",
+    
 ]
 
 MIDDLEWARE = [
@@ -75,10 +86,20 @@ WSGI_APPLICATION = 'NpcProject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE':'django.db.backends.mysql',   #django.db.backends.postgresql_psycopg2',
+        'NAME': "Tenderdb",
+        'USER': "root",
+        'PASSWORD': "Kaydiaan@2023", #"H70v1gfb9mF90J5xTmWv",
+        'HOST': 'localhost', #"containers-us-west-45.railway.app",
+        'PORT':'3306', # "6608",
     }
 }
+#DATABASES = {
+    #'default': {
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': BASE_DIR / 'db.sqlite3',
+  #  }
+#}
 
 
 # Password validation
@@ -116,6 +137,21 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR / "static"]  
+STATIC_ROOT = BASE_DIR/'staticfiles'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# Email configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.zoho.com'
+EMAIL_PORT = 465  # Use port 465 for SSL/TLS
+EMAIL_HOST_USER = 'admin@npcg2c.com'  # Replace with your Zoho Mail email address
+EMAIL_HOST_PASSWORD = 'kaydiaan@2024**'  # Replace with your Zoho Mail email password
+EMAIL_USE_SSL = True
+EMAIL_USE_TLS = False
+DEFAULT_FROM_EMAIL = 'admin@npctender.com'  # Replace with your Zoho Mail email address
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
