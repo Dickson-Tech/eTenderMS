@@ -1,0 +1,77 @@
+{% extends "basic.html" %}
+{% load static %}
+{% block content %}
+    <style>
+        .form-inp{
+            width:100%;
+            padding:5px;
+        }
+    </style>
+    
+
+
+    <div class="bg-light py-3">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 mb-0">
+              <a href="/">Home</a> <span class="mx-2 mb-0">/</span>
+              <strong class="text-black">Profile</strong>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="site-section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <h2 class="h3 mb-5 text-black">Create Your Profile</h2>
+              
+            </div>
+            <div class="col-md-12">
+                <form method="POST" action="{% url 'create_doctor_profile' %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="name">Agency Name:</label>
+                            <input type="text" id="name" name="name" class="form-control" required><br>
+                        </div>
+                        
+                    </div>
+                    
+                       <div class="col-md-6">
+                            <label for="contact_number">Contact Number:</label>
+                            <input type="text" id="contact_number" name="contact_number" class="form-control" required><br>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" class="form-control" required><br>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="address">Address:</label>
+                            <input type="text" id="locationInput"  class="form-control" required><br>
+                            <div id="suggestionList"></div>
+                        </div>
+                    </div>
+                    <input id="selectedLatitude" type="hidden" name="latitude">
+                    <input id="selectedLongitude" type="hidden" name="longitude">
+                    <input id="selectedAddress" type="hidden" name="address"> 
+                    
+                   
+                    
+                    <input type="submit" class="btn btn-primary" value="Create Profile">
+                </form>
+                
+                  
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+     
+{% endblock content %}
